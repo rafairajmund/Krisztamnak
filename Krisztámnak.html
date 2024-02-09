@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+            font-family: 'Arial', sans-serif;
+            background-color: #FFC0CB; /* Light Pink background */
+        }
+
+        #hearts-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .heart {
+            font-size: 2em;
+            color: #FF1493; /* Deep Pink color */
+            position: absolute;
+            animation: heartAnimation 2s linear;
+        }
+
+        @keyframes heartAnimation {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+
+        #question-container {
+            text-align: center;
+            margin-top: 10%;
+        }
+
+        #answers {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .answer-btn {
+            padding: 10px 20px;
+            margin: 10px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #FF1493; /* Deep Pink button color */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+
+        #result {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #result-img {
+            width: 200px;
+            height: 200px;
+            margin-top: 20px;
+        }
+
+        #result-text {
+            margin-top: 10px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        #additional-answer {
+            text-align: center;
+            margin-top: 20px;
+            display: none;
+        }
+
+        #additional-answer-btn {
+            padding: 10px 20px;
+            cursor: pointer;
+            font-size: 16px;
+            background-color: #FF1493;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div id="hearts-container"></div>
+    <div id="question-container">
+        <h1>Krisztácskám! Leszel-e a Valentinom??</h1>
+    </div>
+    <div id="answers">
+        <button class="answer-btn" onclick="showHearts()"><i class="fas fa-heart"></i> Igeen persze mindennél jobban szeretlek</button>
+        <button class="answer-btn" onclick="showAdditionalAnswer()">Nemm!</button>
+    </div>
+
+    <div id="result">
+        <img id="result-img" src="https://cukik.hu/wp-content/uploads/2015/10/A-nagy-nap.jpg" alt="Result Image">
+        <p id="result-text">JUHUUUUUU ÉN IS NAGYON SZERETLEK BABAA</p>
+    </div>
+
+    <div id="additional-answer">
+        <button id="additional-answer-btn" onclick="changeAdditionalAnswer()">Biztoos?</button>
+    </div>
+
+    <script>
+        function showHearts() {
+            const heartsContainer = document.getElementById('hearts-container');
+            for (let i = 0; i < 20; i++) {
+                const heart = document.createElement('i');
+                heart.className = 'fas fa-heart heart';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.animationDuration = Math.random() * 2 + 1 + 's';
+                heartsContainer.appendChild(heart);
+            }
+
+            document.getElementById('result').style.display = 'block';
+            document.getElementById('additional-answer').style.display = 'none';
+        }
+
+        function showAdditionalAnswer() {
+            document.getElementById('additional-answer').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+        }
+
+        function changeAdditionalAnswer() {
+            const additionalAnswerBtn = document.getElementById('additional-answer-btn');
+            additionalAnswerBtn.innerText = "Úgy sincs más választásod úgy hogy IGEN";
+            additionalAnswerBtn.onclick = null; // Disable click after changing the answer
+        }
+    </script>
+</body>
+</html>
